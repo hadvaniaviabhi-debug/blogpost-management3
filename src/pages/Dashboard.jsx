@@ -96,7 +96,7 @@ const Dashboard = () => {
         <section className="posts-section">
           <div className="section-header">
             <h2 className="section-title">Recent Feed</h2>
-            <button className="create-shortcut-btn">
+            <button className="create-shortcut-btn" onClick={() => navigate("/create-post")}>
               <FaPlus /> New Post
             </button>
           </div>
