@@ -1,3 +1,22 @@
 {
-  "posts": []
+  "posts": [
+    {
+      "id": "05fe",
+      "title": "hello",
+      "author": "abhi",
+      "description": "this is the post add abhi by",
+      "image": "https://via.placeholder.com/600x400",
+      "date": "February 13, 2026",
+      "createdAt": "2026-02-13T10:20:14.647Z"
+    },
+    {
+      "id": "6b63",
+      "title": "avi",
+      "author": "this is the post add avi by",
+      "description": "this is the post add the blogpost managemenet system",
+      "image": "https://via.placeholder.com/600x400",
+      "date": "February 13, 2026",
+      "createdAt": "2026-02-13T10:21:17.849Z"
+    }
+  ]
 }
