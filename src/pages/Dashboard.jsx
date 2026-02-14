@@ -57,7 +57,7 @@ const Dashboard = () => {
   // Calculate stats
   const totalPosts = posts.length;
   const userPosts = posts.filter(
-    (post) => post.author?.toLowerCase() === currentUser.toLowerCase()
+    (post) => post.author?.toLowerCase() === currentUser.toLowerCase(),
   ).length;
   const communityPosts = totalPosts - userPosts;
 
@@ -109,16 +109,16 @@ const Dashboard = () => {
                 <div className="post-card" key={post.id}>
                   <div className="post-image-container">
                     <img
-                      src={post.image || "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=500"}
+                      src={
+                        post.image ||
+                        "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=500"
+                      }
                       alt={post.title}
                       className="post-card-image"
                     />
 
                     <div className="post-actions">
-                      <button
-                        className="action-btn edit-btn"
-                        title="Edit Post"
-                      >
+                      <button className="action-btn edit-btn" title="Edit Post">
                         <MdEdit size={22} color="#ffffff" />
                       </button>
 
@@ -134,9 +134,14 @@ const Dashboard = () => {
 
                   <div className="post-card-content">
                     <div className="post-meta">
-                      <span className="post-author">By {post.author || "Anonymous"}</span>
+                      <span className="post-author">
+                        By {post.author || "Anonymous"}
+                      </span>
                       <span className="post-date">
-                        {post.date || new Date(post.createdAt || Date.now()).toLocaleDateString()}
+                        {post.date ||
+                          new Date(
+                            post.createdAt || Date.now(),
+                          ).toLocaleDateString()}
                       </span>
                     </div>
 

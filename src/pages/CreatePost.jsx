@@ -185,9 +185,7 @@ const CreatePost = () => {
                 <div className="image-source-tabs">
                   <button
                     type="button"
-                    className={`tab-btn ${
-                      imageTab === "url" ? "active" : ""
-                    }`}
+                    className={`tab-btn ${imageTab === "url" ? "active" : ""}`}
                     onClick={() => {
                       setImageTab("url");
                       setFormData({ ...formData, imageType: "url" });
@@ -228,9 +226,7 @@ const CreatePost = () => {
               {imageTab === "upload" && (
                 <div
                   className="image-upload-area"
-                  onClick={() =>
-                    document.getElementById("imageUpload").click()
-                  }
+                  onClick={() => document.getElementById("imageUpload").click()}
                 >
                   <FaCloudUploadAlt className="upload-icon" />
                   <p>Click to upload image</p>
@@ -263,11 +259,7 @@ const CreatePost = () => {
             </div>
 
             <div className="form-actions-row">
-              <button
-                type="submit"
-                className="submit-btn"
-                disabled={loading}
-              >
+              <button type="submit" className="submit-btn" disabled={loading}>
                 <FaRegPaperPlane />
                 {loading ? " Publishing..." : " Publish Post"}
               </button>

@@ -54,8 +54,12 @@ const Login = () => {
 
     if (validate()) {
       const user = JSON.parse(localStorage.getItem("authData"));
-      
-      if (user && loginData.email === user.email && loginData.password === user.password) {
+
+      if (
+        user &&
+        loginData.email === user.email &&
+        loginData.password === user.password
+      ) {
         // Store only necessary data in loginData
         const loginSession = {
           email: loginData.email,
@@ -118,7 +122,9 @@ const Login = () => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
-          {errors.password && <span className="error-msg">{errors.password}</span>}
+          {errors.password && (
+            <span className="error-msg">{errors.password}</span>
+          )}
         </div>
 
         <button type="submit" className="btn-primary">
