@@ -12,7 +12,7 @@ const PostDetails = () => {
 
   const handleBackClick = () => {
     navigate("/dashboard");
-  };
+  };    
 
   useEffect(() => {
     const fetchPost = async () => {
