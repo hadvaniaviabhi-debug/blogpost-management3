@@ -11,9 +11,10 @@ import AuthGuard from "./auth/AuthGuard.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CreatePost from "./pages/CreatePost.jsx";
-import EditPost from "./pages/Editpost.jsx"; // ✅ Added
+import EditPost from "./pages/EditPost.jsx"; // ✅ Added
 import PostDetails from "./pages/PostDetails.jsx";
 import Analytics from "./pages/Analytics.jsx";
+import Favorites from "./pages/Favorites.jsx";
 
 function App() {
   const route = createBrowserRouter([
@@ -50,6 +51,14 @@ function App() {
       ),
     },
     {
+      path: "/favorites",
+      element: (
+        <AuthGuard required={true}>
+          <Favorites />
+        </AuthGuard>
+      ),
+    },
+    {
       path: "/create-post",
       element: (
         <AuthGuard required={true}>
@@ -73,8 +82,7 @@ function App() {
         </AuthGuard>
       ),
     },
-
- {
+   {
       path: "/analytics", // ✅ Dynamic Route
       element: (
         <AuthGuard required={true}>
@@ -82,6 +90,8 @@ function App() {
         </AuthGuard>
       ),
     },
+
+    
     
     {
       path: "*",
