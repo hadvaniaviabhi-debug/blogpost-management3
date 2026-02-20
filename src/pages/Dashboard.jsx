@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaStar } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,12 +10,15 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || []
+  );
 
   const handleClick = (postId) => {
     navigate(`/post-details/${postId}`);
   };
 
-  // Fetch posts
+  // Fetch all posts from db.json
   const fetchPosts = async () => {
     try {
       setLoading(true);
@@ -33,6 +36,21 @@ const Dashboard = () => {
   useEffect(() => {
     fetchPosts();
   }, []);
+
+  // Toggle Favorite
+  const toggleFavorite = (postId) => {
+    let updatedFavorites;
+    if (favorites.includes(postId)) {
+      updatedFavorites = favorites.filter((id) => id !== postId);
+      toast.info("Removed from favorites");
+    } else {
+      updatedFavorites = [...favorites, postId];
+      toast.success("Added to favorites");
+    }
+
+    setFavorites(updatedFavorites);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("loginData");
@@ -54,9 +72,11 @@ const Dashboard = () => {
     }
   };
 
+  // Get current user from localStorage
   const loginData = JSON.parse(localStorage.getItem("loginData") || "{}");
   const currentUser = loginData?.email?.split("@")[0] || "User";
 
+  // Calculate stats
   const totalPosts = posts.length;
   const userPosts = posts.filter(
     (post) => post.author?.toLowerCase() === currentUser.toLowerCase()
@@ -72,7 +92,8 @@ const Dashboard = () => {
           <div className="welcome-text">
             <h1>Welcome to Your Dashboard, {currentUser}!</h1>
             <p>
-              Manage your posts, track engagement, and connect with your audience.
+              Manage your posts, track engagement, and connect with your
+              audience.
             </p>
           </div>
         </div>
@@ -121,15 +142,20 @@ const Dashboard = () => {
                       className="post-card-image"
                     />
 
+                    <button
+                      className={`favorites-btn ${
+                        favorites.includes(post.id) ? "active" : ""
+                      }`}
+                      onClick={() => toggleFavorite(post.id)}
+                    >
+                      <FaStar size={22} color="#ffffff" />
+                    </button>
+
                     <div className="post-actions">
                       <button
                         className="action-btn edit-btn"
                         title="Edit Post"
-                        onClick={() =>
-                          navigate(`/edit-post/${post.id}`, {
-                            state: { from: "dashboard" } // ✅ IMPORTANT
-                          })
-                        }
+                        onClick={() => navigate(`/edit-post/${post.id}`)}
                       >
                         <MdEdit size={22} color="#ffffff" />
                       </button>
@@ -159,7 +185,9 @@ const Dashboard = () => {
 
                     <h3 className="post-card-title">{post.title}</h3>
                     <p className="post-card-description">
-                      {post.description || post.content || post.excerpt}
+                      {post.description ||
+                        post.content ||
+                        post.excerpt}
                     </p>
 
                     <button
